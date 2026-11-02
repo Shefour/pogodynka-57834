@@ -1,0 +1,18 @@
+App\Entity\Forecast:
+    properties:
+        date:
+            - NotNull: { groups: [create, edit] }
+        temperature:
+            - NotNull: { groups: [create, edit] }
+            - Range: { min: -90, max: 60, groups: [create, edit] }
+        rainchance:
+            - NotNull: { groups: [create, edit] }
+            - Range: { min: 0, max: 100, groups: [create, edit] }
+        windspeed:
+            - NotNull: { groups: [create, edit] }
+            - PositiveOrZero: { groups: [create, edit] }
+        humidity:
+            - NotNull: { groups: [create, edit] }
+            - Range: { min: 0, max: 100, groups: [create, edit] }
+        location:
+            - NotNull: { groups: [create, edit] }
