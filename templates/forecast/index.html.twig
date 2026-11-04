@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Location</th>
                 <th>Date</th>
                 <th>Temperature</th>
                 <th>Rainchance</th>
@@ -21,14 +22,19 @@
         {% for forecast in forecasts %}
             <tr>
                 <td>{{ forecast.id }}</td>
+                <td>{{ forecast.location.city }}, {{ forecast.location.country }}</td>
                 <td>{{ forecast.date ? forecast.date|date('Y-m-d') : '' }}</td>
                 <td>{{ forecast.temperature }}</td>
                 <td>{{ forecast.rainchance }}</td>
                 <td>{{ forecast.windspeed }}</td>
                 <td>{{ forecast.humidity }}</td>
                 <td>
-                    <a href="{{ path('app_forecast_show', {'id': forecast.id}) }}">show</a>
-                    <a href="{{ path('app_forecast_edit', {'id': forecast.id}) }}">edit</a>
+                    {% if is_granted('ROLE_FORECAST_SHOW') %}
+                        <a href="{{ path('app_forecast_show', {'id': forecast.id}) }}">show</a>
+                    {% endif  %}
+                    {% if is_granted('ROLE_FORECAST_EDIT') %}
+                        <a href="{{ path('app_forecast_edit', {'id': forecast.id}) }}">edit</a>
+                    {% endif  %}
                 </td>
             </tr>
         {% else %}
@@ -38,6 +44,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_forecast_new') }}">Create new</a>
+    {% if is_granted('ROLE_FORECAST_NEW') %}
+        <a href="{{ path('app_forecast_new') }}">Create new</a>
+    {% endif  %}
 {% endblock %}
