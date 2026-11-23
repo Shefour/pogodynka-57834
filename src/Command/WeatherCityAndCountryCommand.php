@@ -14,7 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class WeatherCityAndCountryCommand{
     public function __construct(
-        private WeatherUtil $weatherUtil,
+        private readonly WeatherUtil $weatherUtil,
     ){}
     public function __invoke(
         SymfonyStyle $io,
