@@ -67,9 +67,14 @@ class Forecast
         return $this->temperature;
     }
 
-    public function setTemperature(int $temperature): static
+    public function getFahrenheit(): ?int{
+        $fahrenheit = (float) ($this->temperature * (9 / 5) + 32);
+        return (int) $fahrenheit;
+    }
+
+    public function setTemperature(int|float $temperature): static
     {
-        $this->temperature = $temperature;
+        $this->temperature = (int) $temperature;
 
         return $this;
     }

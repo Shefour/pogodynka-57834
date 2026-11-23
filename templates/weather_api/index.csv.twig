@@ -1,0 +1,4 @@
+city,country,date,temperature,fahrenheit,humidity,rainchance{{- "\n" -}}
+{%- for m in forecasts -%}
+{{ city }},{{ country }},{{ m.date|date('Y-m-d') }},{{ m.temperature }},{{ m.fahrenheit }},{{ m.humidity }},{{ m.rainchance }}{% if not loop.last %}{{- "\n" -}}{% endif %}
+{%- endfor -%}
